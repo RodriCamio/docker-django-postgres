@@ -1,15 +1,21 @@
-part#1
-docker build --tag python-django .
-docker run --publish 8000:8000 python-django
-part#2
-docker compose build
-docker compose run  --rm app django-admin startproject core .
-docker compose up
-part#3
-docker compose build
-docker compose run --rm app django-admin startproject core .
-docker compose up
+#parte 1
+docker compose build #Crear la imagen
+docker compose run  --rm app django-admin startproject core . #Crear un contenedor efimero para que genere los archivos de mi proyecto
+docker compose up -d #Levantar el docker compose en segundo plano
+
+#Para ejecutar comandos dentro del contenedor Django
 docker exec -it django_container /bin/bash
+python3 manage.py startapp libreria #crea la app libreria con todos los archivos necesarios.
 
-python3 manage.py startapp libreria 
+#Comandos para realizar migraciones (tambien se pueden utilizar estos comandos para actualizar los campos de mi base de datos.)
+python3 manage.py makemigrations
+python3 manage.py migrate
 
+#comandos para crear un superusuario
+python3 manage.py createsuperuser
+
+#comandos para la base de datos
+docker exec -it postgres_db psql -U postgres 
+\dt #para ver las tablas
+\d nombre_de_la_tabla #para ver la estructura especifica de una tabla
+\q #para salir
