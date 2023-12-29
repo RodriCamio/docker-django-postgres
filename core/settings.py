@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+from decouple import config
+
+env_path = Path('.') / '.env'
+# config.read_env(env_path)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -78,14 +82,13 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'db',
-        'PORT': '5432',
+        'NAME': config('POSTGRES_DB', default='postgres'),
+        'USER': config('POSTGRES_USER', default='postgres'),
+        'PASSWORD': config('POSTGRES_PASSWORD', default='postgres'),
+        'HOST': config('DB_HOST', default='db'),
+        'PORT': config('DB_PORT', default='5432'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

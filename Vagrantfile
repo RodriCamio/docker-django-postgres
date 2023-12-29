@@ -6,7 +6,6 @@ Vagrant.configure("2") do |config|
     h.vm.box = "ubuntu/focal64"
     h.vm.network "forwarded_port", guest: 8000, host: 8000
     h.vm.hostname = "django-postgres-crud"
-    # h.vm.network "forwarded_port", guest: 22, host: 2222, id: "ssh", auto_correct: true
     h.vm.provision "shell", path: "bootstrap.sh"
     h.vm.provider "virtualbox" do |vb|
       vb.name = "django-postgres-crud"

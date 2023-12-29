@@ -14,19 +14,19 @@ services:
       - db
     networks:
       - mynetwork
+    env_file:
+      - .env  
 
   db:
-    image: postgres:latest
+    image: postgres:15.5-bullseye
     restart: always
-    # volumes:
-    #   - ./data/db:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql
     container_name: postgres_db
     networks:
       - mynetwork
+    env_file:
+      - .env  
 
 networks:
   mynetwork:

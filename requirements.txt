@@ -1,4 +1,6 @@
 asgiref
+python-dotenv
+python-decouple
 Django
 pytz
 sqlparse

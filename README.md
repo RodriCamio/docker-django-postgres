@@ -21,13 +21,27 @@ Asegúrate de tener instalados los siguientes requisitos en tu máquina:
 1. Clona el repositorio:
 
     ```bash
-    git clone https://github.com/tuusuario/turepositorio.git
+    git clone https://github.com/RodriCamio/docker-django-postgres.git
     ```
 
 2. Abre tu IDE y la terminal en el directorio clonado:
 
     ```bash
-    cd turepositorio
+    cd docker-django-postgres
+    ```
+
+## Crear el Archivo .env
+
+1. Crea un archivo con el nombre `.env` en el directorio raíz del proyecto.
+
+2. Abre el archivo `.env` y agrega las siguientes líneas como ejemplo para poder conectarte con tu base de datos Postgres:
+
+    ```env
+    POSTGRES_DB=postgres
+    POSTGRES_USER=postgres
+    POSTGRES_PASSWORD=postgres
+    DB_HOST=db
+    DB_PORT=5432
     ```
 
 ## Crear Máquina Virtual y Configurar Docker
@@ -99,3 +113,5 @@ Asegúrate de tener instalados los siguientes requisitos en tu máquina:
     [http://localhost:8000/admin](http://localhost:8000/admin)
 
 ¡Listo! Ahora puedes explorar y gestionar tu aplicación CRUD de libros. ¡Diviértete programando!
+
+En caso de crear mas columnas o realizar algun tipo de modificacion en tu tabla, para que la base de datos tome el cambio vas a tener que realizar de nuevo la verificacion y exploracion.
