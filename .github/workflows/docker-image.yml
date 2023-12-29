@@ -2,7 +2,7 @@ name: test
 
 on:  
   push: 
-    branches: main  
+    branches: main
 
 permissions: 
   contents: read 
@@ -50,3 +50,4 @@ jobs:
         repository: rodricamio/crud-django-postgres
         push: true
         tags: latest, ${{ github.run_number }}
+        
