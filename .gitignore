@@ -1,2 +1,5 @@
 .vagrant
 .env
+core/__pycache__
+libreria/__pycache__
+libreria/migrations
