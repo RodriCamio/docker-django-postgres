@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: postgres-deployment
+  name: "{{.Release.Name}}-postgres-deployment"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: postgres-container
+      app: {{.Values.labelsAppPostgres}}
   template:
     metadata:
       labels:
-        app: postgres-container
+        app: {{.Values.labelsAppPostgres}}
         tier: backend
     spec:
       containers:
@@ -20,22 +20,20 @@ spec:
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: postgres-credentials
+                  name: "{{ .Release.Name }}-postgres-credentials"
                   key: user
-
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: postgres-credentials
+                  name: "{{ .Release.Name }}-postgres-credentials"
                   key: password
-
             - name: POSTGRES_DB
               valueFrom:
                 configMapKeyRef:
                   name: app-variables
                   key: POSTGRES_DB
           ports:
-            - containerPort: 5432
+            - containerPort: {{.Values.svcPostgresPort}}
           volumeMounts:
             - name: postgres-volume-mount
               mountPath: /var/lib/postgresql/data
@@ -43,4 +41,4 @@ spec:
       volumes:
         - name: postgres-volume-mount
           persistentVolumeClaim:
-            claimName: postgres-pvc
+            claimName: "{{.Release.Name}}-postgres-pvc"

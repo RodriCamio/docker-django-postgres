@@ -1,0 +1,18 @@
+postgresUser: postgres
+postgresDB: app
+dbName: app
+dbUser: postgres
+dbHost: postgres-cluster-ip-service
+dbPort: "5432"
+
+
+secretuser: cG9zdGdyZXM=
+secretpass: cG9zdGdyZXM=
+
+labelsAppPostgres: postgres-container
+storage: 200M
+svcPostgresPort: 5432
+protocol: TCP
+
+labelsAppDjango: django-container
+ContainerPortDjango: 8010

@@ -1,6 +1,3 @@
-###########################
-# ConfigMap
-###########################
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -9,15 +6,9 @@ data:
   #env variables for the postgres component
   POSTGRES_USER: postgres
   POSTGRES_DB: app
-
   #env variables for the backend component
-  DJANGO_ENV: development
-  DEBUG: "1"
   DJANGO_ALLOWED_HOSTS: "*"
-  DJANGO_ADMIN_USER: admin
-  DJANGO_ADMIN_EMAIL: "admin@example.com"
-
-  DATABASE: postgres
+  DATABASES: postgres
   DB_ENGINE: "django.db.backends.postgresql"
   DB_NAME: app
   DB_USER: postgres

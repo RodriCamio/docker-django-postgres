@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "{{.Release.Name}}-app-variables"
+data:
+  POSTGRES_USER: {{ .Values.postgresUser }}
+  POSTGRES_DB: {{ .Values.postgresDB }}
+  DJANGO_ALLOWED_HOSTS: "*"
+  DATABASES: postgres
+  DB_ENGINE: "django.db.backends.postgresql"
+  DB_NAME: {{ .Values.dbName }}
+  DB_USER: {{ .Values.dbUser }}
+  DB_HOST: {{ .Values.dbHost }}
+  DB_PORT: {{ .Values.dbPort }}
