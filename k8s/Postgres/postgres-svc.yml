@@ -1,0 +1,15 @@
+###########################
+# Cluster IP Service
+###########################
+kind: Service
+apiVersion: v1
+metadata:
+  name: postgres-cluster-ip-service
+spec:
+  type: ClusterIP
+  selector:
+    app: postgres-container
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432

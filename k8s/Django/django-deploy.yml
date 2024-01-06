@@ -1,0 +1,46 @@
+###########################
+# Deployment
+###########################
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-postgre-deploy
+  labels:
+    app: django-postgre
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: django-postgre
+  template:
+    metadata:
+      labels:
+        app: django-postgre
+    spec:
+      containers:
+      - name: django
+        image: rodricamio/crud-django-postgres:6
+        command: ["python","./manage.py", "runserver", "0.0.0.0:8010"]
+        ports:
+        - containerPort: 8000
+        env:
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: postgres-credentials
+              key: user
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-credentials
+              key: password
+        - name: POSTGRES_DB
+          valueFrom:
+            configMapKeyRef:
+              name: app-variables
+              key: POSTGRES_DB
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: app-variables
+              key: DB_HOST
