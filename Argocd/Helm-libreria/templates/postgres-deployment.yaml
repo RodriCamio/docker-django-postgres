@@ -3,19 +3,19 @@ kind: Deployment
 metadata:
   name: "{{.Release.Name}}-postgres-deployment"
 spec:
-  replicas: 1
+  replicas: {{.Values.deploy.postgres.replicas}}
   selector:
     matchLabels:
-      app: {{.Values.labelsAppPostgres}}
+      app: {{.Values.deploy.postgres.selector.app}}
   template:
     metadata:
       labels:
-        app: {{.Values.labelsAppPostgres}}
+        app: {{.Values.labels.Postgres}}
         tier: backend
     spec:
       containers:
-        - name: postgres-container
-          image: postgres:15.5-bullseye
+        - name: {{.Values.pod.postgres.name}}
+          image: {{.Values.pod.postgres.image}}
           env:
             - name: POSTGRES_USER
               valueFrom:
@@ -34,11 +34,11 @@ spec:
                   key: POSTGRES_DB
           ports:
             - containerPort: {{.Values.svcPostgresPort}}
+          {{- with .Values.volumeMounts }}
           volumeMounts:
-            - name: postgres-volume-mount
-              mountPath: /var/lib/postgresql/data
-
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      {{- with .Values.volumes }}
       volumes:
-        - name: postgres-volume-mount
-          persistentVolumeClaim:
-            claimName: "{{.Release.Name}}-postgres-pvc"
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

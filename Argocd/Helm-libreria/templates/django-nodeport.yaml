@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: "{{.Release.Name}}-django-cluster-ip-service"
+spec:
+  type: {{.Values.svc.django.type}}
+  selector:
+    app: {{.Values.svc.django.selector.app}}
+  ports:
+    - protocol: {{.Values.svc.django.protocol}}
+      port: {{.Values.svc.django.port | int}}
+      targetPort: {{.Values.svc.django.targetPort | int}}
+      nodePort: {{.Values.svc.django.nodePort | int}}

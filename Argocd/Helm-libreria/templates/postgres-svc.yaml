@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: '{{ include "libreria.fullname" . }}-postgres-pvc'
+  labels:
+    '{{- include "libreria.labels" . | nindent 4 }}'
+spec:
+  type: {{.Values.svc.postgres.type}}
+  selector:
+    app: {{.Values.svc.postgres.selector.app}}
+  ports:
+    - protocol: {{.Values.svc.postgres.protocol}}
+      port: {{.Values.svc.postgres.port}}
+      targetPort: {{.Values.svc.postgres.targetPort}}

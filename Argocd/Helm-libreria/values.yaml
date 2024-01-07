@@ -1,0 +1,68 @@
+# Variables de ConfigMap
+postgres:
+  User: postgres
+  DB: app
+db:
+  Name: app
+  User: postgres
+  Host: postgres-cluster-ip-service
+  Port: "5432"
+# Variables de Secrets
+secretuser: cG9zdGdyZXM=
+secretpass: cG9zdGdyZXM=
+# Variables de Labels
+labels:
+  Postgres: postgres-container
+  Django: django-container
+# Variables de Volumen
+volumes:
+  - name: postgres-volume-mount
+    persistentVolumeClaim:
+    claimName: "{{.Release.Name}}-postgres-pvc"
+volumeMounts:
+  - name: postgres-volume-mount
+    mountPath: /var/lib/postgresql/data
+pvc:
+  storage: 200M
+# Variables de Servicio
+svc:
+  postgres:
+    type: ClusterIP
+    selector:
+      app: postgres-deployment
+    protocol: TCP
+    port: 5432
+    targetPort: 5432
+  django:
+    type: NodePort
+    selector:
+      app: django-deployment
+    protocol: TCP
+    port: 8010
+    targetPort: 8010
+    nodePort: 31000
+# Variables de Deployment
+deploy:
+  postgres:
+    replicas: 1
+    selector:
+      app: postgres-container
+  django:
+    replicas: 1
+    selector:
+      app: django-container
+# Variables de Container
+pod:
+  postgres:
+    name: postgres-container
+    image: postgres:15.5-bullseye
+  django:
+    name: django-container
+    image: rodricamio/crud-django-postgres:6
+    command: ["python","./manage.py", "runserver", "0.0.0.0:8010"]
+# Variables de Job
+job:
+  name: django-job-container
+  image: rodricamio/crud-django-postgres:6
+  command: ["python","./manage.py", "migrate"]
+  restartPolicy: Never

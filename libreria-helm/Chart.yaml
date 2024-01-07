@@ -1,4 +1,0 @@
-apiVersion: v2
-name: libreria-django-postgres
-description: desafio integrador
-version: 0.1.0

@@ -3,23 +3,23 @@ kind: Deployment
 metadata:
   name: "{{.Release.Name}}-django-deployment"
   labels:
-    app: {{.Values.labelsAppDjango}}
+    app: {{.Values.labels.Django}}
 spec:
-  replicas: 1
+  replicas: {{.Values.deploy.django.replicas}}
   selector:
     matchLabels:
-      app: {{.Values.labelsAppDjango}}
+      app: {{.Values.deploy.django.selector.app}}
   template:
     metadata:
       labels:
-        app: {{.Values.labelsAppDjango}}
+        app: {{.Values.labels.Django}}
     spec:
       containers:
-      - name: django-container
-        image: rodricamio/crud-django-postgres:6
-        command: ["python","./manage.py", "runserver", "0.0.0.0:8010"]
+      - name: {{.Values.pod.django.name}}
+        image: {{.Values.pod.django.image}}
+        command: {{.Values.pod.django.command}}
         ports:
-        - containerPort: {{.Values.ContainerPortDjango}}
+        - containerPort: {{.Values.svc.django.port | int}}
         env:
         - name: POSTGRES_USER
           valueFrom:
