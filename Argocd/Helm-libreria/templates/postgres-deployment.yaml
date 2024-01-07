@@ -35,12 +35,11 @@ spec:
                   name: "{{ .Release.Name }}-app-variables"
                   key: POSTGRES_DB
           ports:
-            - containerPort: {{.Values.svcPostgresPort}}
-          {{- with .Values.volumeMounts }}
+            - containerPort: {{.Values.svc.postgres.port}}
           volumeMounts:
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
-      {{- with .Values.volumes }}
+            - name: {{.Values.pvc.postgres.name}}
+              mountPath: {{.Values.pvc.postgres.mountPath}}
       volumes:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+         - name: {{.Values.pvc.postgres.name}}
+           persistentVolumeClaim:
+            - claimName: "{{.Release.Name}}-postgres-pvc"

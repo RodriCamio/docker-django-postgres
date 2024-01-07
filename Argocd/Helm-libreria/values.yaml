@@ -15,15 +15,11 @@ labels:
   Postgres: postgres-container
   Django: django-container
 # Variables de Volumen
-volumes:
-  - name: postgres-volume-mount
-    persistentVolumeClaim:
-    claimName: "{{.Release.Name}}-postgres-pvc"
-volumeMounts:
-  - name: postgres-volume-mount
-    mountPath: /var/lib/postgresql/data
 pvc:
-  storage: 200M
+  postgres:
+    name: postgres-volume-mount
+    mountPath: /var/lib/postgresql/data
+    storage: 200M
 # Variables de Servicio
 svc:
   postgres:
