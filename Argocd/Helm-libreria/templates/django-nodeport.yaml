@@ -5,7 +5,7 @@ metadata:
 spec:
   type: {{.Values.svc.django.type}}
   selector:
-    app: {{.Values.svc.django.selector.app}}
+    app: {{.Values.selector.django.app}}
   ports:
     - protocol: {{.Values.svc.django.protocol}}
       port: {{.Values.svc.django.port | int}}

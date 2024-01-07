@@ -1,59 +1,62 @@
 # Variables de ConfigMap
-postgres:
-  User: postgres
-  DB: app
-db:
-  Name: app
-  User: postgres
-  Host: postgres-cluster-ip-service
-  Port: "5432"
+#data
+POSTGRES_USER: postgres
+POSTGRES_DB: app
+DJANGO_ALLOWED_HOSTS: "*"
+DATABASES: postgres
+DB_ENGINE: "django.db.backends.postgresql"
+DB_NAME: app
+DB_USER: postgres
+DB_HOST: postgres-cluster-ip-service
+DB_PORT: "5432"
 # Variables de Secrets
-secretuser: cG9zdGdyZXM=
-secretpass: cG9zdGdyZXM=
-# Variables de Labels
-labels:
-  Postgres: postgres-container
-  Django: django-container
-# Variables de Volumen
-pvc:
-  postgres:
-    name: postgres-volume-mount
-    mountPath: /var/lib/postgresql/
-    storage: 200M
+#data
+secret:
+  user: cG9zdGdyZXM=
+  pass: cG9zdGdyZXM=
 # Variables de Servicio
+#spec
 svc:
   postgres:
     type: ClusterIP
-    selector:
-      app: postgres-deployment
     protocol: TCP
     port: 5432
     targetPort: 5432
   django:
     type: NodePort
-    selector:
-      app: django-deployment
     protocol: TCP
     port: 8010
     targetPort: 8010
     nodePort: 31000
+# Variables de Labels
+selector:
+  postgres:
+    app: postgres-container
+  django:
+    app: django-postgre
+labels:
+  Postgres: postgres-container
+  Django: django-postgre
+# Variables de Volumen
+pvc:
+  postgres:
+    name: postgres-volume-mount
+    mountPath: /var/lib/postgresql/data
+    storage: 200M
+
 # Variables de Deployment
 deploy:
   postgres:
     replicas: 1
-    selector:
-      app: postgres-container
   django:
     replicas: 1
-    selector:
-      app: django-container
 # Variables de Container
 pod:
   postgres:
     name: postgres-container
     image: postgres:15.5-bullseye
   django:
-    name: django-container
+    name: django
     image: rodricamio/crud-django-postgres:6
     command: ["python","./manage.py", "runserver", "0.0.0.0:8010"]
 # Variables de Job

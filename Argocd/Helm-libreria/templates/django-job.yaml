@@ -8,7 +8,7 @@ spec:
       containers:
       - name: {{.Values.job.name}}
         image: {{.Values.job.image}}
-        command: {{.Values.job.never}}
+        command: {{.Values.job.command}}
         env:
         - name: POSTGRES_USER
           valueFrom:

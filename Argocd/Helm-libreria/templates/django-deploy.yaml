@@ -8,7 +8,7 @@ spec:
   replicas: {{.Values.deploy.django.replicas}}
   selector:
     matchLabels:
-      app: {{.Values.deploy.django.selector.app}}
+      app: {{.Values.selector.django.app}}
   template:
     metadata:
       labels:

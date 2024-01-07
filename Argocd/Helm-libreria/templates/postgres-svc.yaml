@@ -8,5 +8,5 @@ spec:
     app: {{.Values.deploy.postgres.selector.app}}
   ports:
     - protocol: {{.Values.svc.postgres.protocol}}
-      port: {{.Values.svc.postgres.port}}
-      targetPort: {{.Values.svc.postgres.targetPort}}
+      port: {{.Values.svc.postgres.port | int}}
+      targetPort: {{.Values.svc.postgres.targetPort | int}}

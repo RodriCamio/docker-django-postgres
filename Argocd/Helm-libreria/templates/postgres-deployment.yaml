@@ -2,42 +2,43 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: "{{.Release.Name}}-postgres-deployment"
-  labels:
-    app: {{.Values.labels.Postgres}}
 spec:
   replicas: {{.Values.deploy.postgres.replicas}}
   selector:
     matchLabels:
-      app: {{.Values.deploy.postgres.selector.app}}
+      app: {{.Values.selector.postgres.app}}
   template:
     metadata:
       labels:
         app: {{.Values.labels.Postgres}}
+        tier: backend
     spec:
       containers:
-      - name: {{.Values.pod.postgres.name}}
-        image: {{.Values.pod.postgres.image}}
-        ports:
-        - containerPort: {{.Values.svc.postgres.port | int}}
-        env:
-        - name: POSTGRES_USER
-          valueFrom:
-            secretKeyRef:
-              name: "{{ .Release.Name }}-postgres-credentials"
-              key: user
-        - name: POSTGRES_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: "{{ .Release.Name }}-postgres-credentials"
-              key: password
-        - name: POSTGRES_DB
-          valueFrom:
-            configMapKeyRef:
-              name: "{{ .Release.Name }}-app-variables"
-              key: POSTGRES_DB
-        volumeMounts:
-          - name: {{.Values.pvc.postgres.name}}
-            mountPath: {{.Values.pvc.postgres.mountPath}}
+        - name: {{.Values.pod.postgres.name}}
+          image: {{.Values.pod.postgres.image}}
+          ports:
+            - containerPort: {{.Values.svc.postgres.port | int}}
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ .Release.Name }}-postgres-credentials"
+                  key: user
+
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ .Release.Name }}-postgres-credentials"
+                  key: password
+
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: "{{ .Release.Name }}-app-variables"
+                  key: POSTGRES_DB
+          volumeMounts:
+            - name: {{.Values.pvc.postgres.name}}
+              mountPath: {{.Values.pvc.postgres.mountPath}}
       volumes:
       - name: {{.Values.pvc.postgres.name}}
         persistentVolumeClaim:

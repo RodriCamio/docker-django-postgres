@@ -1,8 +1,5 @@
-###########################
-# Cluster IP Service
-###########################
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
   name: postgres-cluster-ip-service
 spec:
