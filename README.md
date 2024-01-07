@@ -1,3 +1,5 @@
+[![test](https://github.com/RodriCamio/docker-django-postgres/actions/workflows/docker-image.yml/badge.svg)](https://github.com/RodriCamio/docker-django-postgres/actions/workflows/docker-image.yml)
+
 Primero que nada aclarar que esta app la construi en base a los siguientes tutoriales:
 
 - [Sitio web con python | CRUD django mysql](https://www.youtube.com/watch?v=ezIj71CX944&t=3089s "Sitio web con python | CRUD django mysql")；
