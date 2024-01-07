@@ -35,7 +35,7 @@ jobs:
           dockerfile: ./Docker/Dockerfile
     - name: Build an image from Dockerfile
       run: |
-        docker build -t rodricamio/crud-django-postgres:${{ github.sha }} -f /Docker/Dockerfile .
+        docker build -t rodricamio/crud-django-postgres:${{ github.sha }} -f Docker/Dockerfile .
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@master
       with:
