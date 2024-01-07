@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: "{{.Release.Name}}-postgres-deployment"
+  labels:
+    app: {{.Values.labels.Postgres}}
 spec:
   replicas: {{.Values.deploy.postgres.replicas}}
   selector:

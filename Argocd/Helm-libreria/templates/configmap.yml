@@ -2,6 +2,8 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: "{{.Release.Name}}-app-variables"
+  labels:
+    app: {{.Values.labels.Postgres}}
 data:
   POSTGRES_USER: {{ .Values.postgres.User }}
   POSTGRES_DB: {{ .Values.postgres.DB }}
