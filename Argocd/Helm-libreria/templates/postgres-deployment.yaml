@@ -18,7 +18,7 @@ spec:
       - name: {{.Values.pod.postgres.name}}
         image: {{.Values.pod.postgres.image}}
         ports:
-        - containerPort: {{.Values.svc.postgres.port}}
+        - containerPort: {{.Values.svc.postgres.port | int}}
         env:
         - name: POSTGRES_USER
           valueFrom:

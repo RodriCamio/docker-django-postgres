@@ -18,7 +18,7 @@ labels:
 pvc:
   postgres:
     name: postgres-volume-mount
-    mountPath: /var/lib/postgresql/data
+    mountPath: /var/lib/postgresql/
     storage: 200M
 # Variables de Servicio
 svc:
