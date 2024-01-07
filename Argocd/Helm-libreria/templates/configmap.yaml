@@ -5,7 +5,6 @@ metadata:
   labels:
     app: {{.Values.labels.Postgres}}
 data:
-  POSTGRES_USER: {{ .Values.postgres.User }}
   POSTGRES_DB: {{ .Values.postgres.DB }}
   DJANGO_ALLOWED_HOSTS: "*"
   DATABASES: postgres
