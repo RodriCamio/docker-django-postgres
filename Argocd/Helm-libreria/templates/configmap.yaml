@@ -5,11 +5,11 @@ metadata:
   labels:
     app: {{.Values.labels.Postgres}}
 data:
-  POSTGRES_DB: {{ .Values.postgres.DB }}
-  DJANGO_ALLOWED_HOSTS: "*"
+  POSTGRES_DB: '{{ .Values.postgres.DB }}'
+  DJANGO_ALLOWED_HOSTS: '"*"'
   DATABASES: postgres
   DB_ENGINE: "django.db.backends.postgresql"
-  DB_NAME: {{ .Values.db.Name }}
-  DB_USER: {{ .Values.db.User }}
-  DB_HOST: {{ .Values.db.Host }}
-  DB_PORT: {{ .Values.db.Port }}
+  DB_NAME: '{{ .Values.db.Name }}'
+  DB_USER: '{{ .Values.db.User }}'
+  DB_HOST: '{{ .Values.db.Host }}'
+  DB_PORT: '{{ .Values.db.Port }}'
