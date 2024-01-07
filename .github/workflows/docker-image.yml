@@ -51,6 +51,6 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: rodricamio/crud-django-postgres
+        dockerfile: Docker/Dockerfile
         push: true
         tags: latest, ${{ github.run_number }}
-        
