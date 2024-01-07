@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: django
-        image: rodricamio/crud-django-postgres:latest
+        image: rodricamio/crud-django-postgres:6
         command: ["python","./manage.py", "runserver", "0.0.0.0:8010"]
         ports:
         - containerPort: 8010
