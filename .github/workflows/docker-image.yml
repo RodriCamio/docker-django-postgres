@@ -32,7 +32,7 @@ jobs:
     - name: Run Hadolint
       uses: hadolint/hadolint-action@v3.1.0
       with:
-          dockerfile: Dockerfile
+          dockerfile: Docker/Dockerfile
     - name: Build an image from Dockerfile
       run: |
         docker build -t rodricamio/crud-django-postgres:${{ github.sha }} .
