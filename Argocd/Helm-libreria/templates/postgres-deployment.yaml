@@ -30,7 +30,7 @@ spec:
             - name: POSTGRES_DB
               valueFrom:
                 configMapKeyRef:
-                  name: app-variables
+                  name: "{{.Release.Name}}-app-variables"
                   key: POSTGRES_DB
           ports:
             - containerPort: {{.Values.svcPostgresPort}}
