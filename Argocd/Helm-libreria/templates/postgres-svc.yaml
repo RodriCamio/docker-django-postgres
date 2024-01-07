@@ -5,7 +5,7 @@ metadata:
 spec:
   type: {{.Values.svc.postgres.type}}
   selector:
-    app: {{.Values.deploy.postgres.selector.app}}
+    app: {{.Values.selector.postgres.app}}
   ports:
     - protocol: {{.Values.svc.postgres.protocol}}
       port: {{.Values.svc.postgres.port | int}}
