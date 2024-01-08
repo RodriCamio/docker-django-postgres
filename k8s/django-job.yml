@@ -30,4 +30,4 @@ spec:
             configMapKeyRef:
               name: app-variables
               key: DB_HOST
-      restartPolicy: Never
+      restartPolicy: OnFailure
